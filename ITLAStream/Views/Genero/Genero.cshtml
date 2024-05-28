@@ -9,23 +9,23 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1 class="text-center mt-3">Mantenimiento de Generos</h1>
-        <div class="mt-5 mb-4 d-flex justify-content-end">
-            <a class="btn btn-outline-warning" asp-controller="Genero" asp-action="Create">Agregar un nuevo genero</a>
-        </div>
-        @if (Model != null && Model.Any())
-        {
-            <div class="card">
-                <div class="card-body text-black">
-                    <table class="table table-sm table-hover table-borderless text-center">
-                        <thead>
+            <div class="mt-5 mb-4 d-flex justify-content-end">
+                <a class="btn btn-outline-warning" asp-controller="Genero" asp-action="Create">Agregar un nuevo genero</a>
+            </div>
+            @if (Model != null && Model.Any())
+            {
+                <div class="card">
+                    <div class="card-body text-black">
+                        <table class="table table-sm table-hover table-borderless text-center">
+                            <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
                                 <th>Acciones</th>
                             </tr>
-                        </thead>
+                            </thead>
 
-                        <tbody>
+                            <tbody>
                             @foreach (var genero in Model)
                             {
                                 @if (genero != null)
@@ -40,18 +40,19 @@
                                     </tr>
                                 }
                             }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        } else
-        {
-            <div class="card">
-                <div class="card-body text-black">
-                    No hay generos registrados
+            } else
+            {
+                <div class="card">
+                    <div class="card-body text-black">
+                        No hay generos registrados
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
 
