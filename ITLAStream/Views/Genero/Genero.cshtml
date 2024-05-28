@@ -1,0 +1,82 @@
+﻿@model List<Application.ViewModels.GeneroViewModel>
+
+@{
+    ViewData["Title"] = "Genero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mt-3">Mantenimiento de Generos</h1>
+        <div class="mt-5 mb-4 d-flex justify-content-end">
+            <a class="btn btn-outline-warning" asp-controller="Genero" asp-action="Create">Agregar un nuevo genero</a>
+        </div>
+        @if (Model != null && Model.Any())
+        {
+            <div class="card">
+                <div class="card-body text-black">
+                    <table class="table table-sm table-hover table-borderless text-center">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var genero in Model)
+                            {
+                                @if (genero != null)
+                                {
+                                    <tr>
+                                        <td>@genero.Nombre</td>
+                                        <td>@genero.Descripcion</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-outline-warning text-black" asp-controller="Genero" asp-action="Create" asp-route-idGenero="@genero.Id">Editar</a>
+                                            <a class="btn btn-sm btn-outline-danger" asp-controller="Genero" asp-action="Delete" asp-route-idGenero="@genero.Id" onclick="eliminar(event, @genero.Id)" >Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        } else
+        {
+            <div class="card">
+                <div class="card-body text-black">
+                    No hay generos registrados
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function eliminar(event, idGenero) {
+            event.preventDefault();
+            Swal.fire({
+                title: '¿Está seguro de que desea eliminar este genero?',
+                showDenyButton: true,
+                confirmButtonText: `Si`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Genero eliminado",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `/Genero/Delete?idGenero=${idGenero}`;
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+}

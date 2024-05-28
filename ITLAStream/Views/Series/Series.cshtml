@@ -1,0 +1,86 @@
+﻿@model List<Application.ViewModels.SerieViewModel>
+
+@{
+    ViewData["Title"] = "Series";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card-group {
+        width: 19rem;
+
+    }
+    .card img {
+        height: 13rem;
+        object-fit: cover;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mt-3">Mantenimiento de Series</h1>
+            <div class="mt-5 mb-4 d-flex justify-content-end">
+                <a class="btn btn-outline-warning" asp-controller="Series" asp-action="Create">Agregar una nueva serie</a>
+            </div>
+            @if (Model != null && Model.Any())
+            {
+                <div class="row">
+                    @foreach (var serie in Model)
+                    {
+                        <div class="col-sm-4 mb-3">
+                            <div class="card text-black">
+                                <img src="@serie.Portada" alt="@serie.Nombre" class="card-img-top" />
+                                <div class="card-body">
+                                    <h5 class="card-title">@serie.Nombre</h5>
+                                    <p class="card-text">@serie.Descripcion</p>
+                                    <p class="fw-bold">Genero:</p>
+                                    <p class="card-text">@serie.Genero?.Nombre</p>
+                                    <p class="fw-bold">Productora:</p>
+                                    <p class="card-text">@serie.Productora?.Nombre</p>
+                                    <div class="d-flex justify-content-end mt-4">
+                                        <a class="btn btn-sm btn-outline-warning text-black" asp-controller="Series" asp-action="Create" asp-route-idSerie="@serie.Id">Editar</a>
+                                        <a class="btn btn-sm btn-outline-danger ms-2" asp-controller="Series" asp-action="Delete" asp-route-idSerie="@serie.Id" onclick="eliminar(event, @serie.Id)">Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-body text-black">
+                        No hay series registradas
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function eliminar(event, idSerie) {
+            event.preventDefault();
+            Swal.fire({
+                title: '¿Está seguro de que desea eliminar esta serie?',
+                showDenyButton: true,
+                confirmButtonText: `Si`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Serie eliminada",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `/Genero/Delete?idSerie=${idSerie}`;
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+}

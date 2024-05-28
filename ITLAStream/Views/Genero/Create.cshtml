@@ -1,0 +1,62 @@
+﻿@model Application.ViewModels.CreateGeneroViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mt-3">Mantenimiento de Generos</h1>
+            <div class="card bg-white shadow mt-5">
+                <div class="card-body">
+                    <form id="generoForm" class="text-black" asp-controller="Genero" asp-action="Create" method="post">
+
+                        <input type="hidden" asp-for="Id" name="Id" />
+
+                        <div class="mb-3">
+                            <label class="mb-2" asp-for="Nombre">Nombre</label>
+                            <input type="text" asp-for="Nombre" name="Nombre" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="mb-2" asp-for="Descripcion">Descripcion</label>
+                            <input type="text" asp-for="Descripcion" name="Descripcion" class="form-control" />
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-end">
+                            @if(Model.Id == 0)
+                            {
+                                <button class="btn btn-outline-warning text-black" type="submit" onclick="crear(event)">Agregar nuevo genero</button>
+                            } else
+                            {
+                                <button class="btn btn-outline-warning text-black" type="submit" onclick="crear(event)">Actualizar genero</button>
+                            }
+
+                            <a class="btn btn-outline-danger ms-2" asp-controller="Genero" asp-action="Genero">Ir atras</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function crear(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: "@(Model.Id == 0 ? "¡Genero creado exitosamente!" : "¡Genero actualizado exitosamente!")",
+                icon: "success",
+                confirmButtonText: "Ok"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('generoForm').submit();
+                }
+            });
+        }
+    </script>
+}

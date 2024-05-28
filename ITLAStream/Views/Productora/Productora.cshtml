@@ -1,0 +1,84 @@
+﻿@model List<Application.ViewModels.ProducturaViewModel>
+
+@{
+    ViewData["Title"] = "Productora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mt-3">Mantenimiento de Productora</h1>
+            <div class="mt-5 mb-4 d-flex justify-content-end">
+                <a class="btn btn-outline-warning" asp-controller="Productora" asp-action="Create">Agregar una nueva productora</a>
+            </div>
+            @if (Model != null && Model.Any())
+            {
+                <div class="card">
+                    <div class="card-body text-black">
+                        <table class="table table-sm table-hover table-borderless text-center">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripcion</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var productora in Model)
+                                {
+                                    @if (productora != null)
+                                    {
+                                        <tr>
+                                            <td>@productora.Nombre</td>
+                                            <td>@productora.Descripcion</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-outline-warning text-black" asp-controller="Productora" asp-action="Create" asp-route-idProductora="@productora.Id">Editar</a>
+                                                <a class="btn btn-sm btn-outline-danger" asp-controller="Productora" asp-action="Delete" asp-route-idProductora="@productora.Id" onclick="eliminar(event, @productora.Id)">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-body text-black">
+                        No hay productoras registradas
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function eliminar(event, idProductora) {
+            event.preventDefault();
+            Swal.fire({
+                title: '¿Está seguro de que desea eliminar esta productora?',
+                showDenyButton: true,
+                confirmButtonText: `Si`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Productora eliminada",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `/Productora/Delete?idProductora=${idProductora}`;
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+}

@@ -1,0 +1,104 @@
+﻿@using Application.ViewModels;
+@model List<SerieViewModel>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .carousel-item img {
+        height: 500px;
+        object-fit: cover;
+    }
+
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <h1 class="text-center mt-3">ITLAStream</h1>
+            <form class="d-flex justify-content-center align-content-center mt-5" asp-controller="Home" asp-action="Index" method="post">
+                <div class="form-group mx-2 w-100">
+                    <input class="form-control" type="text" name="nombre" placeholder="Nombre de la serie" />
+                </div>
+                <div class="form-group mx-2 w-25">
+                    <select class="form-select" name="GeneroId">
+                        <option value="">Elija un genero</option>
+                        @foreach (var genero in ViewBag.genero as List<GeneroViewModel> ?? new List<GeneroViewModel>())
+                        {
+                            <option value="@genero.Id">@genero.Nombre</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group mx-2 w-25">
+                    <select class="form-select" name="ProductoraId">
+                        <option value="">Elija una productora</option>
+                        @foreach (var productora in ViewBag.productora as List<ProducturaViewModel> ?? new List<ProducturaViewModel>())
+                        {
+                            <option value="@productora.Id">@productora.Nombre</option>
+                        }
+                    </select>
+                </div>
+                <button class="btn btn-primary mx-2" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+
+                <button class="btn btn-outline-warning mx-2 w-25" type="submit">
+                    <i class="bi bi-eye-fill"></i>
+                    Ver todas
+                </button>
+            </form>
+        </div>
+    </div>  
+    
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            @if (Model != null && Model.Count > 0)
+            {
+                <div id="carouselExampleIndicators" class="carousel slide">
+
+                    <div class="carousel-indicators">
+                        
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="true" aria-label="Slide @(i + 1)"></button>
+                        }
+
+                    </div>
+
+                    <div class="carousel-inner">
+
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@Model[i].Portada" class="d-block w-100 opacity-50" alt="@Model[i].Nombre">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>@Model[i].Nombre</h5>
+                                    <p>@Model[i].Descripcion</p>
+                                    <p><b>Genero:</b> @Model[i].Genero?.Nombre</p>
+                                    <p><b>Productora:</b> @Model[i].Productora?.Nombre</p>
+                                    <a class="btn btn-outline-warning" asp-controller="Home" asp-action="Reproductor" asp-route-serieId="@Model[i].Id">Ver serie</a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <p>No hay series disponibles.</p>
+            }
+        </div>
+    </div>
+</div>
