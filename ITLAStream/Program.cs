@@ -17,6 +17,13 @@ builder.Services.AddScoped<SerieService>();
 
 var app = builder.Build();
 
+
+// Aplicar migraciones de forma automática
+using var servicesScope = app.Services.CreateScope();
+var dbContext = servicesScope.ServiceProvider.GetRequiredService<ApplicationContext>();
+dbContext.Database.Migrate();
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
