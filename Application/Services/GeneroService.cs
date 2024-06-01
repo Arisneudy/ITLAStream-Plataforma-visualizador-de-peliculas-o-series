@@ -1,18 +1,17 @@
-﻿using Application.ViewModels;
-using Database.Contexts;
-using Database.Models;
+﻿using ITLAStream.Core.Domain.Entities;
+using ITLAStream.Core.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Services;
+namespace ITLAStream.Core.Application.Services;
 
 public class GeneroService
 {
     
-    private readonly ApplicationContext _dbContext;
+    private readonly IGeneroRepository _generoRepository;
     
-    public GeneroService(ApplicationContext dbContext)
+    public GeneroService(IGeneroRepository generoRepository)
     {
-        _dbContext = dbContext;
+        _generoRepository = generoRepository;
     }
 
     #region Metodos generales para los generos

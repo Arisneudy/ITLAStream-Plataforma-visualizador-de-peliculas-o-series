@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.ViewModels
+namespace ITLAStream.Core.Application.ViewModels
 {
     public class FiltroViewModel
     {

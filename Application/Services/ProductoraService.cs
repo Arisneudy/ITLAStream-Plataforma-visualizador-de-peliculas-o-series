@@ -1,17 +1,17 @@
-﻿using Application.ViewModels;
-using Database.Contexts;
+﻿using ITLAStream.Core.Domain.Entities;
 using Database.Models;
+using ITLAStream.Core.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Services;
+namespace ITLAStream.Core.Application.Services;
 
 public class ProductoraService
 {
-    private readonly ApplicationContext _dbContext;
+    private readonly IProductoraRepository _productoraRepository;
 
-    public ProductoraService(ApplicationContext applicationContext)
+    public ProductoraService(IProductoraRepository productoraRepository)
     {
-        _dbContext = applicationContext;
+        _productoraRepository = productoraRepository;
     }
 
     #region Metodos generales para las productoras
@@ -24,15 +24,14 @@ public class ProductoraService
                 Nombre = vm.Nombre,
                 Descripcion = vm.Descripcion
             };
-            _dbContext.Productoras.Add(productora);
-            await _dbContext.SaveChangesAsync();
+            await _productoraRepository.Add(productora);
         }
 
 
         // Metodo para ver todos las productoras
         public async Task<List<ProducturaViewModel>> GetAll()
         {
-            var productora = await _dbContext.Productoras.ToListAsync();
+            var productora = await _productoraRepository.GetAll();
             return productora.Select(productora => new ProducturaViewModel
             {
                 Id = productora.Id,
@@ -45,7 +44,7 @@ public class ProductoraService
         // Metodo para ver una productora por su id
         public async Task<CreateProductoraViewModel> GetById(int id)
         {
-            var productora = await _dbContext.Productoras.FirstOrDefaultAsync(p => p.Id == id);
+            var productora = await _productoraRepository.GetById(id);
             CreateProductoraViewModel vm = new();
             vm.Id = productora.Id;
             vm.Nombre = productora.Nombre;
@@ -60,8 +59,7 @@ public class ProductoraService
             var productora = await _dbContext.Productoras.FirstOrDefaultAsync(p => p.Id == vm.Id);
             productora.Nombre = vm.Nombre;
             productora.Descripcion = vm.Descripcion ?? productora.Descripcion;
-            _dbContext.Update(productora);
-            await _dbContext.SaveChangesAsync();
+            await _productoraRepository.Update(vm);
         }
 
 
@@ -69,8 +67,7 @@ public class ProductoraService
         public async Task Delete(int id)
         {
             var productora = await _dbContext.Productoras.FirstOrDefaultAsync(p => p.Id == id);
-            _dbContext.Productoras.Remove(productora);
-            await _dbContext.SaveChangesAsync();
+            await _productoraRepository.Delete(id);
         }
 
     #endregion

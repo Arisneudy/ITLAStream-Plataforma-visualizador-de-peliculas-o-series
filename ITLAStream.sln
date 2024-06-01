@@ -1,10 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLAStream", "ITLAStream\ITLAStream.csproj", "{50438F77-CEF2-4805-BA5E-A20EBACF2970}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLAStream", "ITLAStream\ITLAStream.csproj", "{50438F77-CEF2-4805-BA5E-A20EBACF2970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{B0698432-602A-43E2-8DA9-9A0D82F23687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLAStream.Core.Application", "Application\ITLAStream.Core.Application.csproj", "{B0698432-602A-43E2-8DA9-9A0D82F23687}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{16AEC7D6-11AD-4C34-8729-1C322FA62EEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLAStream.Infrastucture.Persistence", "Database\ITLAStream.Infrastucture.Persistence.csproj", "{16AEC7D6-11AD-4C34-8729-1C322FA62EEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6A6A5FC1-25AB-46D1-953E-F8EB82B16703}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{92766064-199C-4017-9A8A-DCBDEF985F51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastucture", "Infrastucture", "{4B7AADAB-4B64-4D8E-9F39-835A445BC097}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLAStream.Core.Domain", "ITLAStream.Core.Domain\ITLAStream.Core.Domain.csproj", "{6710DC44-80DB-4C0E-B3E0-BD73650B79A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +35,21 @@ Global
 		{16AEC7D6-11AD-4C34-8729-1C322FA62EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16AEC7D6-11AD-4C34-8729-1C322FA62EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16AEC7D6-11AD-4C34-8729-1C322FA62EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6710DC44-80DB-4C0E-B3E0-BD73650B79A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6710DC44-80DB-4C0E-B3E0-BD73650B79A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6710DC44-80DB-4C0E-B3E0-BD73650B79A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6710DC44-80DB-4C0E-B3E0-BD73650B79A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{50438F77-CEF2-4805-BA5E-A20EBACF2970} = {6A6A5FC1-25AB-46D1-953E-F8EB82B16703}
+		{B0698432-602A-43E2-8DA9-9A0D82F23687} = {92766064-199C-4017-9A8A-DCBDEF985F51}
+		{16AEC7D6-11AD-4C34-8729-1C322FA62EEF} = {4B7AADAB-4B64-4D8E-9F39-835A445BC097}
+		{6710DC44-80DB-4C0E-B3E0-BD73650B79A3} = {92766064-199C-4017-9A8A-DCBDEF985F51}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA894775-B0AE-47B6-892B-5A63F96A3835}
 	EndGlobalSection
 EndGlobal

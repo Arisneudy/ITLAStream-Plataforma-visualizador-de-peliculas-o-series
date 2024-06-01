@@ -1,7 +1,7 @@
 ﻿using Application.ViewModels.BaseViewModel;
 using Database.Models;
 
-namespace Application.ViewModels;
+namespace ITLAStream.Core.Application.ViewModels;
 
 public class SerieViewModel : BViewModel
 {
