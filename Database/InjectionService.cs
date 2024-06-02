@@ -24,9 +24,9 @@ namespace ITLAStream.Infrastucture.Persistence
 
 
             // Aplicar migraciones de forma automática
-            //using var servicesScope = Services.CreateScope();
-            //var dbContext = servicesScope.ServiceProvider.GetRequiredService<ApplicationContext>();
-            //dbContext.Database.Migrate();
+            using var servicesScope = Services.BuildServiceProvider().CreateScope();
+            var dbContext = servicesScope.ServiceProvider.GetRequiredService<ApplicationContext>();
+            dbContext.Database.Migrate();
         }
     }
 }
