@@ -1,8 +1,7 @@
-﻿@using Application.ViewModels;
-@model List<SerieViewModel>
+﻿@model List<ITLAStream.Core.Application.ViewModels.SerieViewModel>
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Inicio";
 }
 
 <style>
@@ -24,7 +23,7 @@
                 <div class="form-group mx-2 w-25">
                     <select class="form-select" name="GeneroId">
                         <option value="">Elija un genero</option>
-                        @foreach (var genero in ViewBag.genero as List<GeneroViewModel> ?? new List<GeneroViewModel>())
+                        @foreach (var genero in ViewBag.genero as List<ITLAStream.Core.Application.ViewModels.GeneroViewModel> ?? new List<ITLAStream.Core.Application.ViewModels.GeneroViewModel>())
                         {
                             <option value="@genero.Id">@genero.Nombre</option>
                         }
@@ -33,7 +32,7 @@
                 <div class="form-group mx-2 w-25">
                     <select class="form-select" name="ProductoraId">
                         <option value="">Elija una productora</option>
-                        @foreach (var productora in ViewBag.productora as List<ProducturaViewModel> ?? new List<ProducturaViewModel>())
+                        @foreach (var productora in ViewBag.productora as List<ITLAStream.Core.Application.ViewModels.ProducturaViewModel> ?? new List<ITLAStream.Core.Application.ViewModels.ProducturaViewModel>())
                         {
                             <option value="@productora.Id">@productora.Nombre</option>
                         }

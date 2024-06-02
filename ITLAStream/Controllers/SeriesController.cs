@@ -1,16 +1,17 @@
-﻿using Application.Services;
-using Application.ViewModels;
+﻿using ITLAStream.Core.Application.Interfaces.Services;
+using ITLAStream.Core.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITLAStream.Controllers;
 
 public class SeriesController : Controller
 {
-    private readonly SerieService _serieService;
-    private readonly GeneroService _generoService;
-    private readonly ProductoraService _productoraService;
+    private readonly IProductoraService _productoraService;
+    private readonly IGeneroService _generoService;
+    private readonly ISerieService _serieService;
 
-    public SeriesController(SerieService serieService, GeneroService generoService, ProductoraService productoraService)
+
+    public SeriesController(ISerieService serieService, IGeneroService generoService, IProductoraService productoraService)
     {
         _serieService = serieService;
         _generoService = generoService;

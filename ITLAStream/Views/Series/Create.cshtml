@@ -1,5 +1,4 @@
-﻿@using Application.ViewModels
-@model Application.ViewModels.CreateSerieViewModel
+﻿@model ITLAStream.Core.Application.ViewModels.CreateSerieViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -19,43 +18,49 @@
                         <div class="mb-3">
                             <label class="mb-2" asp-for="Nombre">Nombre</label>
                             <input type="text" asp-for="Nombre" name="Nombre" class="form-control" required />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label class="mb-2" asp-for="Descripcion">Descripcion</label>
                             <input type="text" asp-for="Descripcion" name="Descripcion" class="form-control" required />
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label class="mb-2" asp-for="Genero">Genero</label>
                             <select class="form-select" asp-for="GeneroId" required>
                                 <option value="">Elija un genero</option>
-                                @foreach (var genero in ViewBag.generoSerie as List<GeneroViewModel> ?? new List<GeneroViewModel>())
+                                @foreach (var genero in ViewBag.generoSerie as List<ITLAStream.Core.Application.ViewModels.GeneroViewModel> ?? new List<ITLAStream.Core.Application.ViewModels.GeneroViewModel>())
                                 {
                                     <option value="@genero.Id">@genero.Nombre</option>
                                 }
                             </select>
+                            <span asp-validation-for="GeneroId" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label class="mb-2" asp-for="ProductoraId">Productura</label>
                             <select class="form-select" asp-for="ProductoraId" required>
                                 <option value="">Elija una productora</option>
-                                @foreach (var productora in ViewBag.productoraSerie as List<ProducturaViewModel> ?? new List<ProducturaViewModel>())
+                                @foreach (var productora in ViewBag.productoraSerie as List<ITLAStream.Core.Application.ViewModels.ProducturaViewModel> ?? new List<ITLAStream.Core.Application.ViewModels.ProducturaViewModel>())
                                 {
                                     <option value="@productora.Id">@productora.Nombre</option>
                                 }
                             </select>
+                            <span asp-validation-for="ProductoraId" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label for="formFileSm" class="mb-2" asp-for="Portada">Enlace de la Portada</label>
                             <input asp-for="Portada" name="Portada" type="text" class="form-control" />
+                            <span asp-validation-for="Portada" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label class="mb-2" asp-for="VideoLink">Enlace del video</label>
                             <input type="text" asp-for="VideoLink" name="VideoLink" class="form-control" placeholder="https://www.youtube.com/" required />
+                            <span asp-validation-for="VideoLink" class="text-danger"></span>
                         </div>
 
                         <div class="mt-4 d-flex justify-content-end">
@@ -81,13 +86,37 @@
     <script>
         function crear(event) {
             event.preventDefault();
+
+            const form = document.getElementById('serieForm');
+            const requiredFields = [
+                { name: "Portada", message: "Debe colocar el enlace de la portada" },
+                { name: "Nombre", message: "Debe colocar el nombre" },
+                { name: "Descripcion", message: "Debe colocar la descripcion" },
+                { name: "GeneroId", message: "Debe seleccionar un genero" },
+                { name: "ProductoraId", message: "Debe seleccionar una productora" },
+                { name: "VideoLink", message: "Debe colocar el enlace del video" }
+            ];
+
+            for (let field of requiredFields) {
+                const input = form.querySelector(`[name="${field.name}"]`);
+                if (!input.value) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: field.message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                    return;
+                }
+            }
+
             Swal.fire({
                 title: "@(Model.Id == 0 ? "¡Serie creada exitosamente!" : "¡Serie actualizada exitosamente!")",
                 icon: "success",
                 confirmButtonText: "Ok"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('serieForm').submit();
+                    form.submit();
                 }
             });
         }

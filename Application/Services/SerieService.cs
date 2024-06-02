@@ -1,12 +1,11 @@
 ﻿using ITLAStream.Core.Domain.Entities;
-using Database.Models;
 using ITLAStream.Core.Application.ViewModels;
-using ITLAStream.Core.Domain.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
+using ITLAStream.Core.Application.Interfaces.Repositories;
+using ITLAStream.Core.Application.Interfaces.Services;
 
 namespace ITLAStream.Core.Application.Services;
 
-public class SerieService
+public class SerieService : ISerieService
 {
     private readonly ISerieRepository _serieRepository;
 

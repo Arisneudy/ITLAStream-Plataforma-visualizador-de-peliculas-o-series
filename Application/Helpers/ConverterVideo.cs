@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Utils
+namespace ITLAStream.Core.Application.Helpers
 {
     public class ConverterVideo
     {

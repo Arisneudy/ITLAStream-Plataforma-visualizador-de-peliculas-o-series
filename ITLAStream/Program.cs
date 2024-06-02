@@ -1,27 +1,19 @@
-using Application.Services;
-using Database.Contexts;
-using Microsoft.EntityFrameworkCore;
+using ITLAStream.Infrastucture.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ITLAStreamConnection"));
-});
-builder.Services.AddScoped<ApplicationContext>();
-builder.Services.AddScoped<GeneroService>();
-builder.Services.AddScoped<ProductoraService>();
-builder.Services.AddScoped<SerieService>();
+builder.Services.AddPersistenceLayer(builder.Configuration);
+builder.Services.AddApplicationLayer();
 
 var app = builder.Build();
 
 
 // Aplicar migraciones de forma automática
-using var servicesScope = app.Services.CreateScope();
-var dbContext = servicesScope.ServiceProvider.GetRequiredService<ApplicationContext>();
-dbContext.Database.Migrate();
+//using var servicesScope = app.Services.CreateScope();
+//var dbContext = servicesScope.ServiceProvider.GetRequiredService<ApplicationContext>();
+//dbContext.Database.Migrate();
 
 
 // Configure the HTTP request pipeline.

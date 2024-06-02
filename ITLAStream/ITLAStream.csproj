@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\Application\ITLAStream.Core.Application.csproj" />
       <ProjectReference Include="..\Database\ITLAStream.Infrastucture.Persistence.csproj" />
       <ProjectReference Include="..\ITLAStream.Core.Domain\ITLAStream.Core.Domain.csproj" />
     </ItemGroup>

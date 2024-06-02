@@ -1,9 +1,5 @@
-﻿using Application.ViewModels.BaseViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ITLAStream.Core.Application.ViewModels.BaseViewModel;
+
 
 namespace ITLAStream.Core.Application.ViewModels
 {
@@ -11,6 +7,6 @@ namespace ITLAStream.Core.Application.ViewModels
     {
         public int GeneroId { get; set; }
         public int ProductoraId { get; set; }
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
     }
 }

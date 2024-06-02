@@ -1,14 +1,14 @@
-﻿using Application.Services;
-using Application.ViewModels;
+﻿using ITLAStream.Core.Application.Interfaces.Services;
+using ITLAStream.Core.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITLAStream.Controllers;
 
 public class ProductoraController : Controller
 {
-    private readonly ProductoraService _productoraService;
+    private readonly IProductoraService _productoraService;
 
-    public ProductoraController(ProductoraService productoraService)
+    public ProductoraController(IProductoraService productoraService)
     {
         _productoraService = productoraService;
     }

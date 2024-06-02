@@ -1,5 +1,6 @@
-﻿using Application.ViewModels.BaseViewModel;
-using Database.Models;
+﻿using ITLAStream.Core.Domain.Entities;
+using ITLAStream.Core.Application.ViewModels.BaseViewModel;
+
 
 namespace ITLAStream.Core.Application.ViewModels;
 

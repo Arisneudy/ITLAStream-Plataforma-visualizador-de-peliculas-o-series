@@ -1,18 +1,17 @@
-using System.Diagnostics;
-using Application.Services;
-using Application.Utils;
-using Application.ViewModels;
+using ITLAStream.Core.Application.Helpers;
+using ITLAStream.Core.Application.Interfaces.Services;
+using ITLAStream.Core.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITLAStream.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ProductoraService _productoraService;
-    private readonly GeneroService _generoService;
-    private readonly SerieService _serieService;
+    private readonly IProductoraService _productoraService;
+    private readonly IGeneroService _generoService;
+    private readonly ISerieService _serieService;
 
-    public HomeController(ProductoraService productoraService, GeneroService generoService, SerieService serieService)
+    public HomeController(IProductoraService productoraService, IGeneroService generoService, ISerieService serieService)
     {
         _generoService = generoService;
         _productoraService = productoraService;

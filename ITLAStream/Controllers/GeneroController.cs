@@ -1,18 +1,15 @@
-﻿using Application.Services;
-using Application.ViewModels;
-using Database.Contexts;
-using Database.Models;
+﻿using ITLAStream.Core.Application.Interfaces.Services;
+using ITLAStream.Core.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ITLAStream.Controllers;
 
 public class GeneroController : Controller
 {
 
-    private readonly GeneroService _generoService;
+    private readonly IGeneroService _generoService;
     
-    public GeneroController(GeneroService generoService)
+    public GeneroController(IGeneroService generoService)
     {
         _generoService = generoService;
     }
